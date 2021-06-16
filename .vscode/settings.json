@@ -7,6 +7,9 @@
         "**/.DS_Store": true,
 
         ".vscode": true,
+        ".prettierrc": true,
+        ".gitignore": true,
+        "memo.md": true,
 
         "0[1-9]*/**/*terraform*": true,
         "0[1-9]*/**/node_modules": true,

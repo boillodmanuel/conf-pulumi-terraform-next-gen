@@ -1,2 +1,9 @@
 config:
   aws:region: eu-west-3
+  demo-config:dbPassword:
+    secure: AAABAC8BgUngk6GIeCdN+MHlBbg2Tw0yu/P+HUugXWO21SQEtxb975E=
+  demo-config:dbUsername: foo
+  demo-config:liste: 
+    - 1
+    - 4
+    - 6
