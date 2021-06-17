@@ -1,3 +1,4 @@
+import * as pulumi from '@pulumi/pulumi'
 import * as aws from '@pulumi/aws'
 
 // A storage bucket.
@@ -14,9 +15,5 @@ const eventSubscription = videos.onObjectCreated("onNewVideo", (event: aws.s3.Bu
 export const bucketName = videos.bucket
 export const functionName = eventSubscription.func.name
 
-// Upload a file:
-// aws s3 cp index.ts s3://$(pulumi stack output bucketName)/index.ts
-
-// Open function
-// open https://eu-west-3.console.aws.amazon.com/lambda/home?region=eu-west-3#/functions/$(pulumi stack output functionName)
-// Monitor / Log / Open in Cloudwatch
+export const url = pulumi.interpolate`https://eu-west-3.console.aws.amazon.com/lambda/home?region=eu-west-3#/functions/${functionName}`
+export const upload = pulumi.interpolate`aws s3 cp index.ts s3://${bucketName}/index.ts`

@@ -1,11 +1,17 @@
 # Custom resource / provider
 
-Quoi : Créer n'importe quelle type de ressource qui s'intégre au cycle de vie des ressources pulumi
+=> Créer n'importe quelle type de ressource qui s'intégre au cycle de vie des ressources pulumi
 
-Cas d'utilisation : s'intégrer avec une API REST d'un service tiers
+Ex :
+- s'intégrer avec une API REST d'un service tiers
+- intégration avec système du fichier
+
 
 # Automation API
 
-Quoi : Permet d'appeler programmatiquement les commandes pulumi
+=> Permet d'appeler programmatiquement les commandes pulumi
 
-Cas d'utilisation : création de stack à la volée, orchestration complexe, ...
+Ex :
+- création de stack à la volée, 
+- orchestration complexe, 
+- ...
