@@ -22,7 +22,7 @@ terraform workspace create dev
 terraform workspace select dev
 
 pulumi preview
-pulumi up
+pulumi upcd .
 ```
 
 # Intro

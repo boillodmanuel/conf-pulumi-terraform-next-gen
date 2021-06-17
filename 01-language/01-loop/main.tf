@@ -12,13 +12,9 @@ provider "aws" {
   region = "eu-west-3"
 }
 
-variable "env" {
-  description = "env: dev or prod"
-}
-
 // CODE 
 
 resource "aws_iam_user" "users" {
-  for_each = toset(["Todd", "James", "Alice", "Dottie"])
+  for_each = toset(["Todd", "James", "Lea", "Dottie"])
   name     = each.key
 }

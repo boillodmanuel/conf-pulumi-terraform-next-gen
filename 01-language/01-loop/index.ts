@@ -10,7 +10,7 @@ new aws.iam.User('user-bob', {
 
 // SOLUTION
 
-for (const name of ["Todd", "James", "Alice", "Dottie"]) {
+for (const name of ["Todd", "James", "Lea", "Dottie"]) {
 
     new aws.iam.User(`user-${name}`, {
         name: name

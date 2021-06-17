@@ -10,6 +10,8 @@
         ".prettierrc": true,
         ".gitignore": true,
         "memo.md": true,
+        "init.sh": true,
+        "select.bash": true,
 
         "0[1-9]*/**/*terraform*": true,
         "0[1-9]*/**/node_modules": true,

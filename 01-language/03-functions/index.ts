@@ -4,9 +4,9 @@ import * as aws from "@pulumi/aws";
 
 // ORIGINAL
 
-new aws.iam.User('user-bob', {
-    name: 'bob',
-})
+// new aws.iam.User('user-bob', {
+//     name: 'bob',
+// })
 
 
 // SOLUTION
@@ -20,7 +20,7 @@ function validateUsername(username: string): string {
 
 
 new aws.iam.User('user-bob', {
-    name: validateUsername('bob'),
+    name: validateUsername('user-bob'),
 })
 
 // SOLUTION 2
@@ -33,5 +33,5 @@ function createUser(username: string): aws.iam.User {
   })
 }
 
-createUser('bob')
-createUser('joe')
+createUser('user-bill')
+createUser('user-joe')
