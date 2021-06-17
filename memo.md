@@ -8,8 +8,10 @@ npmrc offline
 
 - se logguer à [AWS](aws.amazon.com)
 - se logguer à [Pulumi](app.pulumi.com)
+- VSCode => Zoom x2
 
 [Work Adventure](https://play.workadventu.re/register/a043e32f-8537-4308-aa47-ce05ad34321b)
+
 
 # RAPPEL
 
@@ -28,23 +30,29 @@ pulumi upcd .
 Intro
 =====
 
+Note: Bienvenue // Question dans chat ou m'interrompre directement
+
 Pour ceux qui connaissent pas Pulumi mais qui connaissent Terraform la description est simple, c'est comme Terraform mais en mieux
-Pour les autres, langage d'infrastructure as code de type déclaratif qui utilise des langages traditionnels (TypeScript, Python, Go, .Net, ...)
+Pour les autres, outil d'infrastructure as code de type déclaratif qui utilise des langages traditionnels (TypeScript, Python, Go, .Net, ...)
 et qui permet de déployer des infrastructures de façon moderne.
 
 ## Description
 
-- Multicloud, comme terraform, ansible mais pas AWS Cloud Gormation, Azure ARM template
+- Multicloud, comme terraform, ansible mais pas AWS Cloud Formation, Azure ARM template
 - Mais pas 1 code pour plusieurs cloud (ça n'existe pas et pas sûr que cela existe un jour)
 
 - Déclaratif : on décrit l'état pas comment y arriver
 - Outils intelligent (le classe au dessus d'ansible par ex)
-  - Persiste l’état de l’infrastructure
+  - Persiste l’état de l’infrastructure / diff / optimiser
   - Analyse le code et détermine les tåches à effectuer, assez rapidement (même avec milliers de lignes de code), et sans appeler le cloud provider
-  - Ordonnancement et parallélisation automatiques des tâches à effectuer
-  - Gestion du cycle de vie des ressources. Sait si la ressource doit être création, mise à jour, remplacée ou supprimée
+  - Ordonnancement et parallélisation automatiques des tâches à effectuer (stockage objet + bd)
+  - Gestion du cycle de vie des ressources. 
+  - Prédire les opérations réalisées : Sait si la ressource doit être création, mise à jour, remplacée ou supprimée
   - Aussi capable de faire l'opération inverse, c'est à dire détruire les ressources
   - Dry-run pour prévisualiser les changements
+
+
+## Backend
 
 ## Langage
 
@@ -64,9 +72,12 @@ Avantage :
 - communauté
 - réunit ops et dev
 
+Inconvénient :
+- c'est la mise en place de l'env. Installer node ou python, ca peut être simple, mais c'est ça peut aussi être compliqué si y'a plusieurs versions etc.
+
+
 TIPS :
 
-Inconvénient, c'est la mise en place de l'env. Installer node ou python, ca peut être simple, mais c'est ça peut aussi être compliqué si y'a plusieurs versions etc.
 
 apprentissage d'un nouveau langage - FAUX enfin vrai et faux
 
