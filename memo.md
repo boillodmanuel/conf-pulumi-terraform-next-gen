@@ -1,5 +1,7 @@
-# PREPA
+PREPA
+=====
 
+## PREPA 
 ```bash
 # voir commande `gitops` dans bashrc
 pulumi-login-manu
@@ -9,11 +11,19 @@ npmrc offline
 - se logguer à [AWS](aws.amazon.com)
 - se logguer à [Pulumi](app.pulumi.com)
 - VSCode => Zoom x2
+- Keynote => Play in windows
 
 [Work Adventure](https://play.workadventu.re/register/a043e32f-8537-4308-aa47-ce05ad34321b)
 
+## FIN
 
-# RAPPEL
+```bash
+./init.sh destroy
+# retourn arrière git (sauf modif à conserver)
+```
+
+
+## RAPPEL
 
 ```bash
 terraform init
@@ -32,32 +42,49 @@ Intro
 
 Note: Bienvenue // Question dans chat ou m'interrompre directement
 
+## `Slide +` Intro
+
 Pour ceux qui connaissent pas Pulumi mais qui connaissent Terraform la description est simple, c'est comme Terraform mais en mieux
-Pour les autres, outil d'infrastructure as code de type déclaratif qui utilise des langages traditionnels (TypeScript, Python, Go, .Net, ...)
+
+Pour les autres, plateforme d'infrastructure as code qui utilise des langages traditionnels (TypeScript, Python, Go, .Net, ...)
 et qui permet de déployer des infrastructures de façon moderne.
 
-## Description
+## `Slide +` Description
 
 - Multicloud, comme terraform, ansible mais pas AWS Cloud Formation, Azure ARM template
 - Mais pas 1 code pour plusieurs cloud (ça n'existe pas et pas sûr que cela existe un jour)
 
 - Déclaratif : on décrit l'état pas comment y arriver
-- Outils intelligent (le classe au dessus d'ansible par ex)
+
+- Outils intelligent (je le classe au dessus d'ansible par ex)
   - Persiste l’état de l’infrastructure / diff / optimiser
-  - Analyse le code et détermine les tåches à effectuer, assez rapidement (même avec milliers de lignes de code), et sans appeler le cloud provider
+  - Analyse le code et détermine les tåches à effectuer, assez rapidement, sans appeler le cloud provider (même avec milliers de lignes de code)
   - Ordonnancement et parallélisation automatiques des tâches à effectuer (stockage objet + bd)
   - Gestion du cycle de vie des ressources. 
-  - Prédire les opérations réalisées : Sait si la ressource doit être création, mise à jour, remplacée ou supprimée
+  - Prévisualiser les changements: 
+    - Sait si la ressource doit être création, mise à jour, remplacée ou supprimée
+    - Déduire l'impact sur la continuité de service
   - Aussi capable de faire l'opération inverse, c'est à dire détruire les ressources
-  - Dry-run pour prévisualiser les changements
 
 
 ## Backend
+
+Par défaut, on utilise le backend pulumi pour persister l'état
+Tout de suite opérationnel, avec :
+- gestion multi-environnement des projets
+- persistance de l'état
+- collaboration
+- traçabilité
+- !! pas de limite de run concurrent (en mode gratuit - Terraform Cloud)
+
+Choisir d'autre solution de backend
 
 ## Langage
 
 S'appuie sur des langages traditionnels.
 Ce qui faisaient hurler les détracteurs, et notamment les défenseurs de Terraform
+
+- sens de l'histoire - toutes les solutions d'infra as code se tournent vers l'utilisation de langage de dev pour répondre aux limites des langages plus statiques (yaml, json, hcl)
 
 Avantage :
 
@@ -78,24 +105,21 @@ Inconvénient :
 
 TIPS :
 
-
+2.5 ans de pulumi
 apprentissage d'un nouveau langage - FAUX enfin vrai et faux
 
  pour avoir fait plusieurs formations a des gens qui ne connaissait pas du tout TS, il suffit d'un petit guide (cheatsheet) de la syntaxe de base, avec les types, les boucles et ça suffit. Et c'est beaucoup plus intuitif qu'en HCL
 
-```
-eu-west-3
-```
-
-Pulumi: Multi Language Packages
-https://www.youtube.com/watch?v=_RXvNS5N8A8
 
 00-project
 ==========
 
 syntaxe declarative (comparaison tf, ts, py)
-
-completion
+```ts
+// show class doc
+aws.ec2.Vpc
+```
+completion (s'appuie sur le langage ts nativ - pas de plugin custom)
 doc des attributs
 
 pulumi up
@@ -207,10 +231,12 @@ export const url = bucket.bucketRegionalDomainName
   demo-config:dbPassword:
     secure: AAABAHhe1/KpvWaxSrXoXIM/zFtITwuF+FTbwiYRGIcHggkQCr5cbDk=
   demo-config:dbUsername: foo
-  demo-config:liste:
-  - 1
-  - 4
-  - 6
+  demo-config:obj:
+    key: name
+    values: 
+    - 1
+    - 2
+
 ```
 
 ```ts
@@ -247,9 +273,13 @@ const database = new aws.rds.Instance('default', {
     dbSubnetGroupName: subnetGroup.name, // ADDED (1)
 })
 
-const liste = config.requireObject<number[]>('liste') // CONFIG LIST
 
-export const l = liste.map((i) => i * 10)
+interface Obj {
+    key: string
+    value: number[]
+}
+
+const obj = config.requireObject<Obj>('obj')
 ```
 
 ## 02-component
@@ -341,3 +371,30 @@ export const monVpc2Info = {
 // open https://eu-west-3.console.aws.amazon.com/lambda/home?region=eu-west-3#/functions/$(pulumi stack output functionName)
 // Monitor / Log / Open in Cloudwatch
 ```
+
+
+Notes
+=====
+
+No terraform native secret !
+
+Rien dans doc terraform
+- https://www.terraform.io/docs/language/values/variables.html
+- https://www.terraform.io/docs/language/state/sensitive-data.html
+
+Rien dans blog 2020
+- https://blog.gruntwork.io/a-comprehensive-guide-to-managing-secrets-in-your-terraform-code-1d586955ace1
+
+
+
+Pulumi vient avec un secret manager intégré 
+- Chiffrement propre à chaque stack pulumi
+- Le code peut être poussé dans GIT
+
+Possibilité d'utiliser d'autre Gestionnaire de secret
+
+- https://www.pulumi.com/docs/intro/concepts/secrets/#available-encryption-providers
+  - awskms: AWS Key Management Service (KMS)
+  - azurekeyvault: Azure Key Vault
+  - gcpkms: Google Cloud Key Management Service (KMS)
+  - hashivault: HashiCorp Vault Transit Secrets Engine

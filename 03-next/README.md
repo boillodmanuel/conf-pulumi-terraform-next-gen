@@ -19,9 +19,13 @@ const vpcId= remoteState.getOutput("vpc_id")
 
 
 
+
+
 # Étape 2 : Migrer l'existant
 
 Convertir le code terraform avec [tf2pulumi](https://www.pulumi.com/tf2pulumi/)
+
+
 
 
 
