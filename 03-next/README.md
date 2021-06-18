@@ -1,20 +1,34 @@
+```yaml
+__          ___           _     _   _           _     ___  
+\ \        / / |         | |   | \ | |         | |   |__ \ 
+ \ \  /\  / /| |__   __ _| |_  |  \| | _____  _| |_     ) |
+  \ \/  \/ / | '_ \ / _` | __| | . ` |/ _ \ \/ / __|   / / 
+   \  /\  /  | | | | (_| | |_  | |\  |  __/>  <| |_   |_|  
+    \/  \/   |_| |_|\__,_|\__| |_| \_|\___/_/\_\\__|  (_)  
 
+```                                              
+
+
+
+
+              
+                                                           
 # Étape 1 : Créer un projet Pulumi qui s'intégre avec terraform
 
 Lire un state terraform
 
 ```ts
-import * as tf from "@pulumi/terraform"
+import * as tf from "@pulumi/terraform";
 
 const remoteState = new tf.state.RemoteStateReference("s3state", {
     backendType: "s3",
     bucket: "pulumi-terraform-state-test",
     key: "test/terraform.tfstate",
     region: "us-west-2"
-})
+});
 
 // Use the getOutput function on the resource to access root outputs
-const vpcId= remoteState.getOutput("vpc_id")
+const vpcId= remoteState.getOutput("vpc_id");
 ```
 
 
