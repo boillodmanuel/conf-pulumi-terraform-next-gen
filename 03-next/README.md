@@ -1,4 +1,18 @@
+```yaml
+__          ___           _     _   _           _     ___  
+\ \        / / |         | |   | \ | |         | |   |__ \ 
+ \ \  /\  / /| |__   __ _| |_  |  \| | _____  _| |_     ) |
+  \ \/  \/ / | '_ \ / _` | __| | . ` |/ _ \ \/ / __|   / / 
+   \  /\  /  | | | | (_| | |_  | |\  |  __/>  <| |_   |_|  
+    \/  \/   |_| |_|\__,_|\__| |_| \_|\___/_/\_\\__|  (_)  
 
+```                                              
+
+
+
+
+              
+                                                           
 # Étape 1 : Créer un projet Pulumi qui s'intégre avec terraform
 
 Lire un state terraform
@@ -19,9 +33,13 @@ const vpcId= remoteState.getOutput("vpc_id");
 
 
 
+
+
 # Étape 2 : Migrer l'existant
 
 Convertir le code terraform avec [tf2pulumi](https://www.pulumi.com/tf2pulumi/)
+
+
 
 
 
